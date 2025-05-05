@@ -96,6 +96,12 @@ pour les interface reliant les appareils réseaux il doivent être en mode trunk
 
 le nombre MAXIMUM de vlan en simultané est **250.**
 
+Il est également possible de crée un Vlan dédier à la VOIP (voice over internet protocol).
+Ce Vlan peut-être mis en place en parallèle d'un vlan data classique. La spécificité réside dans le fait qu'il sera prioritaire sur le transfert des paquets. 
+
+pour ajouter un vlan voix:
+**voice vlan < numero du vlan >**
+
 ## Routage inter-vlan 
 
 pour connecter plusieurs vlan, il faut configurer un routeur.
