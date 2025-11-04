@@ -44,4 +44,3 @@ en classe C, les adresse de 192.168.0.0 à 192.168.255.255 sont à usage privé 
 | POP3      | TCP     | 110   |
 | IMAP      | TCP     | 143   |
 | RDP       | TCP     | 3389  |
-

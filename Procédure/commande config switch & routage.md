@@ -102,6 +102,27 @@ Ce Vlan peut-être mis en place en parallèle d'un vlan data classique. La spéc
 pour ajouter un vlan voix:
 **voice vlan < numero du vlan >**
 
+## Configuration d'une interface
+
+selon les switchs/routeurs/commutateurs que vous aurez, les interfaces auront un nom diffèrent mais dans la majorité des cas, elles s'appelleront: **Gigaethernet*a*/*b*/*c*** <br>
+**a** correspond au switch dans la stack <br>
+**b** correspond aux port SFP <br>
+**c** correspond au numéro de port <br>
+
+une fois en mode de configuration (configure terminal) vous avez deux façons de configuré des interfaces:
+- la première est en la configurant une part une
+  > interface gi*a*/*b*/*c*
+- la seconde plusieurs à la fois
+  >interface range gi*a*/*b*/*c* - *c2*
+  **c** correspond à la première interface à configuré et **c2** à la dernière. la configuration sera appliqué à toutes les interface entre ces deux là.
+
+ATTENTION  si vous configuré plusieurs interfaces, ils doivent **impérativement** ce suivrent: 1,2,3,4...
+
+vous pouvez à présent appliquer les commandes vue dans les autres chapitres:
+- switchport mode access/trunk
+- switchport access vlan x
+- switchport security shutdown/restrict/protect
+
 ## Routage inter-vlan 
 
 pour connecter plusieurs vlan, il faut configurer un routeur.
