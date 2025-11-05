@@ -149,7 +149,7 @@ RIP ce base sur **un algorithme de vecteur de distance**, c'est à dire qu'il co
 
 pour une configuration avec le protocole RIP:
 **router rip** => entré dans la configuration du protocole
-**version 2** => nous utiliseront la version 2 qui est plus sécurisé et supporte le VLSM
+**version 2** => nous utiliseront la version 2 qui est plus sécurisé et supporte le VLSM (voir "ClassLess et ClassFull" doc)
 **network _address IP du réseau_** => indiquer à RIP les réseaux auxquels ce routeur à accès
 
 seul les routes auxquels le routeur à **directement accès** doivent être indiqué à RIP, si il y a plusieurs routeur dans la topologie, il faudra indiqué à chacun les réseaux auxquels ils sont connecté.

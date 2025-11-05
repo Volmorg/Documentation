@@ -30,6 +30,12 @@ dans la classe A, l'adresse: **10.0.0.0 jusque 10.255.255.255** est à usage pri
 en classe B, les adresses **172.16.0.0 jusque 172.31.255.255** sont à usage privé <br>
 en classe C, les adresse de **192.168.0.0 à 192.168.255.255** sont à usage privé <br>
 
+**variable-length subnet mask (VLSM)**
+
+Ce concept permet de découper une adresse réseau en réduisant le nombre d'adresse IP disponible pour segmenter notre organisation.
+Cela ce fait en **modifiant la taille du masque associé**
+
+
 
 **il existe cependant certaines adresse spécial:** <br><br>
 0.0.0.0 => signifie *ce réseau* <br>
