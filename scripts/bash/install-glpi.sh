@@ -43,45 +43,45 @@ rm /var/www/html/glpi/install/install.php
 sed -i -e 's/session.cookie_httponly =/session.cookie_httponly = on/g' /etc/php/8.2/apache2/php.ini
 
 # Creation du fichier de configuration du site apache2
-echo "
-<VirtualHost :80> 
-
-    ServerName ITFormation 
-
-    DocumentRoot /var/www/glpi/public 
-
-    # If you want to place GLPI in a subfolder of your site (e.g. your virtual host is serving multiple applications), 
-
-    # you can use an Alias directive. If you do this, the DocumentRoot directive MUST NOT target the GLPI directory itself. 
-
-    Alias "/glpi" "/var/www/html/glpi/public" 
-
-    <Directory /var/www/html/glpi/public> 
-
-        Require all granted 
-
-        RewriteEngine On 
-
-        # Redirect all requests to GLPI router, unless file exists. 
-
-        RewriteCond %{REQUEST_FILENAME} !-f 
-
-        RewriteRule ^(.)$ index.php [QSA,L] 
-
-    </Directory> 
-
-</VirtualHost>
-
-" >> /etc/apache2/sites-available/glpi.conf
+#echo "
+#<VirtualHost :80> 
+#
+ #   ServerName ITFormation 
+#
+#    DocumentRoot /var/www/glpi/public 
+#
+#    # If you want to place GLPI in a subfolder of your site (e.g. your virtual host is serving multiple applications), 
+#
+#    # you can use an Alias directive. If you do this, the DocumentRoot directive MUST NOT target the GLPI directory itself. 
+#
+#    Alias "/glpi" "/var/www/html/glpi/public" 
+#
+#    <Directory /var/www/html/glpi/public> 
+#
+#        Require all granted 
+#
+#        RewriteEngine On 
+#
+#        # Redirect all requests to GLPI router, unless file exists. 
+#
+#        RewriteCond %{REQUEST_FILENAME} !-f 
+#
+#        RewriteRule ^(.)$ index.php [QSA,L] 
+#
+#    </Directory> 
+#
+#</VirtualHost>
+#
+#" >> /etc/apache2/sites-available/glpi.conf
 
 # activation du site web de glpi
-a2ensite /etc/apache2/sites-available/glpi.conf
+#a2ensite /etc/apache2/sites-available/glpi.conf
 
 # desactivation du site par defaut
-a2dissite /etc/apache2/sites-available/000-default.conf
+#a2dissite /etc/apache2/sites-available/000-default.conf
 
 # activation du mode rewrite
-a2enmod rewrite
+#a2enmod rewrite
 
 # redemarrage du service apache2
 systemctl restart apache2
