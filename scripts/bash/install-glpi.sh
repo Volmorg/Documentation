@@ -1,20 +1,17 @@
+# placement a la racine avant debut du script
+cd /
+
 # mise a jour du systeme
 apt-get update && apt-get upgrade
 
 # installation de apache2
 apt-get install apache2 -y
 
-# verification de apache2
-systemctl status apache2.service
-
 # installation de php
 apt-get install php
 
 # installation de mariadb
 apt install mariadb-server
-
-# verification de l'installation
-systemctl status mariadb.service
 
 # creation de la base de donne de glpi ainsi que son utilisateur
 mysql -u root -e "CREATE DATABASE glpi;"
@@ -39,12 +36,63 @@ mv /usr/src/glpi/* /var/www/html/glpi/
 #donner les droits a apache sur le dossier
 chown -R www-data:www-data /var/www/html/
 
+# suppression du fichier install.php
+rm /var/www/html/glpi/install/install.php
+
+# activation de l'option session.cookie_httponly
+sed -i -e 's/session.cookie_httponly =/session.cookie_httponly = on/g' /etc/php/8.2/apache2/php.ini
+
+# Creation du fichier de configuration du site apache2
+echo "
+<VirtualHost :80> 
+
+    ServerName ITFormation 
+
+    DocumentRoot /var/www/glpi/public 
+
+    # If you want to place GLPI in a subfolder of your site (e.g. your virtual host is serving multiple applications), 
+
+    # you can use an Alias directive. If you do this, the DocumentRoot directive MUST NOT target the GLPI directory itself. 
+
+    Alias "/glpi" "/var/www/html/glpi/public" 
+
+    <Directory /var/www/html/glpi/public> 
+
+        Require all granted 
+
+        RewriteEngine On 
+
+        # Redirect all requests to GLPI router, unless file exists. 
+
+        RewriteCond %{REQUEST_FILENAME} !-f 
+
+        RewriteRule ^(.)$ index.php [QSA,L] 
+
+    </Directory> 
+
+</VirtualHost>
+
+" >> /etc/apache2/sites-available/glpi.conf
+
+# activation du site web de glpi
+a2ensite /etc/apache2/sites-available/glpi.conf
+
+# desactivation du site par defaut
+a2dissite /etc/apache2/sites-available/000-default.conf
+
+# activation du mode rewrite
+a2enmod rewrite
+
+# redemarrage du service apache2
+systemctl restart apache2
+
 # affichage pour vérification
 systemctl status apache2
 systemctl status mariadb
 php -v
 
 # donne les indentifiants pour la connection a la base de donnée
+clear
 echo "identifiant de glpi pour ce connecter a la base de donnée"
 echo "identifiant: glpibdd"
 echo "mot de passe: Azerty1"
